@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <newingredient.h>
+#include <newrecipe.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainMenu; }
@@ -28,10 +29,14 @@ private:
     QSqlDatabase db;
     QString name;
     NewIngredient *newIng;
+    NewRecipe *newRecipe;
+    void addPictures();
 
 private slots:
     void addIngredient();
-    void dataReceprion(QString);
+    void addNewRecipe();
+    void dataReception(QString);
+    void newRecipeReception(QString);
     void dataSort();
 
 };

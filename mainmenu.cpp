@@ -6,9 +6,12 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
     ui->setupUi(this);
     newIng = new NewIngredient(this);
     newIng->hide();
+    newRecipe = new NewRecipe(this);
+    newRecipe->hide();
 
     connect(ui->addIngrButton, SIGNAL(clicked()), this, SLOT(addIngredient()));
     connect(ui->setFilter_button, SIGNAL(clicked()), this, SLOT(dataSort()));
+    connect(ui->addRecipeButton, SIGNAL(clicked()), this, SLOT(addNewRecipe()));
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("/Users/vadimgrebensikov/3 course/1 semester/Visual/CourseWork/Reсipes.db3");
@@ -24,13 +27,9 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
         ui->tableView->setColumnWidth(3, 75);
         ui->tableView->setColumnWidth(4, 135);
         ui->tableView->setColumnWidth(5, 135);
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->tableView->show();
-
-        /*for(int i = 0; i < model->rowCount(); i++) {
-            QString query = ":/pictures/" + QString::number(i + 1) + ".jpg";
-            model->setData(model->index(i, 6), query);
-        }
-        model->submitAll();*/
+        addPictures();
     } else {
         QMessageBox::warning(this, "Error", db.lastError().text());
     }
@@ -46,14 +45,33 @@ MainMenu::~MainMenu()
     delete ui;
 }
 
+void MainMenu::addPictures()
+{
+    for(int i = 0; i < model->rowCount(); i++) {
+        QString query = ":/pictures/" + QString::number(i + 1) + ".jpg";
+        model->setData(model->index(i, 6), query);
+        model->submitAll();
+    }
+}
+
 void MainMenu::addIngredient()
 {
     newIng->show();
 }
 
-void MainMenu::dataReceprion(QString str)
+void MainMenu::addNewRecipe()
+{
+    newRecipe->show();
+}
+
+void MainMenu::dataReception(QString str)
 {
     ui->comboBox_3->addItem(str);
+}
+
+void MainMenu::newRecipeReception(QString str)
+{
+    ui->label->setText(str);
 }
 
 void MainMenu::dataSort()
@@ -76,12 +94,5 @@ void MainMenu::dataSort()
     model->setSort(0, Qt::AscendingOrder);
     model->select();
     ui->tableView->setModel(model);
-    ui->tableView->setColumnHidden(0, true);
-    ui->tableView->setColumnHidden(6, true);
-    ui->tableView->setColumnWidth(1, 125);
-    ui->tableView->setColumnWidth(2, 125);
-    ui->tableView->setColumnWidth(3, 75);
-    ui->tableView->setColumnWidth(4, 135);
-    ui->tableView->setColumnWidth(5, 135);
     ui->tableView->show();
 }
