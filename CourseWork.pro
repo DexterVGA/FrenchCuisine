@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    editrecipe.cpp \
     helper.cpp \
     main.cpp \
     mainmenu.cpp \
@@ -24,12 +25,14 @@ SOURCES += \
     newrecipe.cpp
 
 HEADERS += \
+    editrecipe.h \
     helper.h \
     mainmenu.h \
     newingredient.h \
     newrecipe.h
 
 FORMS += \
+    editrecipe.ui \
     helper.ui \
     mainmenu.ui \
     newingredient.ui \

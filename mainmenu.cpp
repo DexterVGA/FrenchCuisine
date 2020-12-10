@@ -9,14 +9,17 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
     newRecipe = new NewRecipe(this);
     newRecipe->hide();
     help = new Helper();
-    help->show();
+    help->hide();
+    editForm = new editRecipe(this);
+    editForm->hide();
 
     connect(ui->addIngrButton, SIGNAL(clicked()), this, SLOT(addIngredient()));
     connect(ui->setFilter_button, SIGNAL(clicked()), this, SLOT(dataSort()));
     connect(ui->addRecipeButton, SIGNAL(clicked()), this, SLOT(addNewRecipe()));
     connect(ui->tableView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(handleOnTableClicked(const QModelIndex &)));
     connect(ui->dailyDishButton, SIGNAL(clicked()), this, SLOT(showDailyDish()));
-    connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editRecipe()));
+    connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editRecipe_slot()));
+    connect(this, SIGNAL(sendData(QString)), editForm, SLOT(recieveData(QString)));
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("/Users/vadimgrebensikov/3 course/1 semester/Visual/CourseWork/Recipes.db3");
@@ -40,7 +43,7 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
     }
 
     srand(time(NULL));
-    randomDish = 1 + rand() % 50;
+    randomDish = 0 + rand() % (model->rowCount() - 1);
     //ui->label->setText(model->index(2,1).data().toString());
     //ui->label->setPixmap(QPixmap(":/pictures/1.jpg"));
     //ui->textEdit->setText(QCoreApplication::applicationDirPath());
@@ -54,7 +57,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::addPictures()
 {
-    for(int i = 0; i < model->rowCount(); i++) {
+    for(int i = 0; i < 50; i++) {
         QString query = ":/pictures/" + QString::number(i + 1) + ".jpg";
         model->setData(model->index(i, 6), query);
         model->submitAll();
@@ -78,7 +81,16 @@ void MainMenu::dataReception(QString str)
 
 void MainMenu::newRecipeReception(QString str)
 {
-    ui->label->setText(str);
+    QStringList lst = str.split("\n");
+    int lastRow = model->rowCount();
+    model->insertRow(lastRow);
+    for(int i = 0; i < 6; i++) {
+        model->setData(model->index(lastRow, i+1), lst.at(i));
+    }
+    model->submitAll();
+    model->select();
+    ui->tableView->setModel(model);
+    ui->tableView->show();
 }
 
 void MainMenu::dataSort()
@@ -148,7 +160,25 @@ void MainMenu::showDailyDish()
     ui->label_14->setText(model->index(rowNum, 4).data().toString());
 }
 
-void MainMenu::editRecipe()
+void MainMenu::editReception(QString str)
 {
+    QStringList lst = str.split("\n");
+    for(int i = 0; i < 6; i++) {
+        model->setData(model->index(rowNumDiff, i+1), lst.at(i));
+    }
+    model->submitAll();
+    model->select();
+    ui->tableView->setModel(model);
+    ui->tableView->show();
+}
 
+void MainMenu::editRecipe_slot()
+{
+    rowNumDiff = rowNum;
+    QString str = "";
+    for(int i = 1; i <= 6; i++) {
+        str += model->index(rowNumDiff, i).data().toString() + "\n";
+    }
+    emit sendData(str);
+    editForm->show();
 }

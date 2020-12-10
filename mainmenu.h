@@ -12,6 +12,7 @@
 #include <newingredient.h>
 #include <newrecipe.h>
 #include <helper.h>
+#include <editrecipe.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainMenu; }
@@ -34,8 +35,10 @@ private:
     NewIngredient *newIng;
     NewRecipe *newRecipe;
     Helper *help;
+    editRecipe *editForm;
     int rowNum = 0;
     int randomDish = 0;
+    int rowNumDiff = 0;
     void addPictures();
 
 private slots:
@@ -43,10 +46,14 @@ private slots:
     void addNewRecipe();
     void dataReception(QString);
     void newRecipeReception(QString);
+    void editReception(QString);
     void dataSort();
     void handleOnTableClicked(const QModelIndex &);
     void showDailyDish();
-    void editRecipe();
+    void editRecipe_slot();
+
+signals:
+    void sendData(QString str);
 
 };
 #endif // MAINMENU_H
