@@ -3,5 +3,7 @@
         <file>helper/f1.html</file>
         <file>helper/f1r.html</file>
         <file>helper/index.html</file>
+        <file>helper/f2.html</file>
+        <file>helper/f3.html</file>
     </qresource>
 </RCC>

@@ -52,6 +52,7 @@ private slots:
     void showDailyDish();
     void editRecipe_slot();
     void slot_help();
+    void slot_author();
 
 signals:
     void sendData(QString str);

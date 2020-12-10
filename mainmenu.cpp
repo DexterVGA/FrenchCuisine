@@ -21,6 +21,7 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
     connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editRecipe_slot()));
     connect(this, SIGNAL(sendData(QString)), editForm, SLOT(recieveData(QString)));
     connect(ui->action, SIGNAL(triggered()), this, SLOT(slot_help()));
+    connect(ui->action_3, SIGNAL(triggered()), this, SLOT(slot_author()));
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("/Users/vadimgrebensikov/3 course/1 semester/Visual/CourseWork/Recipes.db3");
@@ -187,4 +188,9 @@ void MainMenu::editRecipe_slot()
 void MainMenu::slot_help()
 {
     help->show();
+}
+
+void MainMenu::slot_author()
+{
+    QMessageBox::information(this, "Об авторе", "Гребенщиков В.А.\nИП-815");
 }
