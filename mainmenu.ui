@@ -117,7 +117,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="editButton">
     <property name="geometry">
      <rect>
       <x>110</x>

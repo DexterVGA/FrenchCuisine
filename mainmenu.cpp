@@ -8,12 +8,15 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
     newIng->hide();
     newRecipe = new NewRecipe(this);
     newRecipe->hide();
+    help = new Helper();
+    help->show();
 
     connect(ui->addIngrButton, SIGNAL(clicked()), this, SLOT(addIngredient()));
     connect(ui->setFilter_button, SIGNAL(clicked()), this, SLOT(dataSort()));
     connect(ui->addRecipeButton, SIGNAL(clicked()), this, SLOT(addNewRecipe()));
     connect(ui->tableView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(handleOnTableClicked(const QModelIndex &)));
     connect(ui->dailyDishButton, SIGNAL(clicked()), this, SLOT(showDailyDish()));
+    connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editRecipe()));
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("/Users/vadimgrebensikov/3 course/1 semester/Visual/CourseWork/Recipes.db3");
@@ -143,4 +146,9 @@ void MainMenu::showDailyDish()
     ui->label_10->setText(model->index(rowNum, 3).data().toString());
     ui->label_12->setText(model->index(rowNum, 5).data().toString());
     ui->label_14->setText(model->index(rowNum, 4).data().toString());
+}
+
+void MainMenu::editRecipe()
+{
+
 }

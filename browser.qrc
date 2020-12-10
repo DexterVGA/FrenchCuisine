@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/browser">
+        <file>helper/f1.html</file>
+        <file>helper/f1r.html</file>
+        <file>helper/index.html</file>
+    </qresource>
+</RCC>

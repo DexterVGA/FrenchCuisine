@@ -17,17 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    helper.cpp \
     main.cpp \
     mainmenu.cpp \
     newingredient.cpp \
     newrecipe.cpp
 
 HEADERS += \
+    helper.h \
     mainmenu.h \
     newingredient.h \
     newrecipe.h
 
 FORMS += \
+    helper.ui \
     mainmenu.ui \
     newingredient.ui \
     newrecipe.ui
@@ -38,4 +41,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    browser.qrc \
     images.qrc

@@ -11,6 +11,7 @@
 #include <QTableView>
 #include <newingredient.h>
 #include <newrecipe.h>
+#include <helper.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainMenu; }
@@ -32,6 +33,7 @@ private:
     QString name;
     NewIngredient *newIng;
     NewRecipe *newRecipe;
+    Helper *help;
     int rowNum = 0;
     int randomDish = 0;
     void addPictures();
@@ -44,6 +46,7 @@ private slots:
     void dataSort();
     void handleOnTableClicked(const QModelIndex &);
     void showDailyDish();
+    void editRecipe();
 
 };
 #endif // MAINMENU_H
