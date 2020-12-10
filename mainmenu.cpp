@@ -12,9 +12,10 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
     connect(ui->addIngrButton, SIGNAL(clicked()), this, SLOT(addIngredient()));
     connect(ui->setFilter_button, SIGNAL(clicked()), this, SLOT(dataSort()));
     connect(ui->addRecipeButton, SIGNAL(clicked()), this, SLOT(addNewRecipe()));
+    connect(ui->tableView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(handleOnTableClicked(const QModelIndex &)));
 
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("/Users/vadimgrebensikov/3 course/1 semester/Visual/CourseWork/Reсipes.db3");
+    db.setDatabaseName("/Users/vadimgrebensikov/3 course/1 semester/Visual/CourseWork/Recipes.db3");
     if(db.open()) {
         model = new QSqlTableModel(parent, db);
         model->setTable("french_cuisine");
@@ -34,9 +35,10 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
         QMessageBox::warning(this, "Error", db.lastError().text());
     }
 
+    randomDish = 1 + rand() % 50;
     //ui->label->setText(model->index(2,1).data().toString());
     //ui->label->setPixmap(QPixmap(":/pictures/1.jpg"));
-    //ui->label->setText(QString::number(model->rowCount()));
+    //ui->textEdit->setText(QCoreApplication::applicationDirPath());
 
 }
 
@@ -95,4 +97,27 @@ void MainMenu::dataSort()
     model->select();
     ui->tableView->setModel(model);
     ui->tableView->show();
+}
+
+void MainMenu::handleOnTableClicked(const QModelIndex &index)
+{
+    if(index.isValid()) {
+        ui->label->setFrameShape(QFrame::WinPanel);
+        ui->label_5->setText("Название:");
+        ui->label_7->setText("Категория:");
+        ui->label_9->setText("Сложность:");
+        ui->label_11->setText("Время приготовления:");
+        ui->label_13->setText("Ингредиенты:");
+
+        rowNum = index.row();
+        QPixmap pix(model->index(rowNum, 6).data().toString());
+        int w = ui->label->width();
+        int h = ui->label->height();
+        ui->label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        ui->label_6->setText(model->index(rowNum, 1).data().toString());
+        ui->label_8->setText(model->index(rowNum, 2).data().toString());
+        ui->label_10->setText(model->index(rowNum, 3).data().toString());
+        ui->label_12->setText(model->index(rowNum, 5).data().toString());
+        ui->label_14->setText(model->index(rowNum, 4).data().toString());
+    }
 }

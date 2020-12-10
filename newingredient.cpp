@@ -6,7 +6,6 @@ NewIngredient::NewIngredient(QWidget *parent) : QMainWindow(parent), ui(new Ui::
     ui->setupUi(this);
 
     connect(this, SIGNAL(sendData(QString)), parent, SLOT(dataReception(QString)));
-    //connect(ui->buttonBox, SIGNAL(clicked()), this, SLOT(buttonBox_click()));
 }
 
 NewIngredient::~NewIngredient()

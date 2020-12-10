@@ -8,6 +8,7 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QTableView>
 #include <newingredient.h>
 #include <newrecipe.h>
 
@@ -26,10 +27,13 @@ public:
 private:
     Ui::MainMenu *ui;
     QSqlTableModel *model;
+    QTableView *resultView;
     QSqlDatabase db;
     QString name;
     NewIngredient *newIng;
     NewRecipe *newRecipe;
+    int rowNum = 0;
+    int randomDish = 0;
     void addPictures();
 
 private slots:
@@ -38,6 +42,7 @@ private slots:
     void dataReception(QString);
     void newRecipeReception(QString);
     void dataSort();
+    void handleOnTableClicked(const QModelIndex &);
 
 };
 #endif // MAINMENU_H
