@@ -250,7 +250,7 @@
      <string>Применить фильтр</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="dailyDishButton">
     <property name="geometry">
      <rect>
       <x>930</x>

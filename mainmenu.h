@@ -43,6 +43,7 @@ private slots:
     void newRecipeReception(QString);
     void dataSort();
     void handleOnTableClicked(const QModelIndex &);
+    void showDailyDish();
 
 };
 #endif // MAINMENU_H
