@@ -51,6 +51,7 @@ private slots:
     void handleOnTableClicked(const QModelIndex &);
     void showDailyDish();
     void editRecipe_slot();
+    void slot_help();
 
 signals:
     void sendData(QString str);

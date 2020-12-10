@@ -20,6 +20,7 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
     connect(ui->dailyDishButton, SIGNAL(clicked()), this, SLOT(showDailyDish()));
     connect(ui->editButton, SIGNAL(clicked()), this, SLOT(editRecipe_slot()));
     connect(this, SIGNAL(sendData(QString)), editForm, SLOT(recieveData(QString)));
+    connect(ui->action, SIGNAL(triggered()), this, SLOT(slot_help()));
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("/Users/vadimgrebensikov/3 course/1 semester/Visual/CourseWork/Recipes.db3");
@@ -181,4 +182,9 @@ void MainMenu::editRecipe_slot()
     }
     emit sendData(str);
     editForm->show();
+}
+
+void MainMenu::slot_help()
+{
+    help->show();
 }
