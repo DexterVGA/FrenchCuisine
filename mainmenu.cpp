@@ -46,11 +46,9 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
     }
 
     srand(time(NULL));
-    randomDish = 0 + rand() % (model->rowCount() - 1);
-    //ui->label->setText(model->index(2,1).data().toString());
-    //ui->label->setPixmap(QPixmap(":/pictures/1.jpg"));
-    //ui->textEdit->setText(QCoreApplication::applicationDirPath());
+    randomDish = 1 + rand() % 50;
 
+    ui->setFilter_button->setMinimumSize(151, 41);
 }
 
 MainMenu::~MainMenu()

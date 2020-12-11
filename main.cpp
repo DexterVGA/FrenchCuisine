@@ -27,6 +27,10 @@ int main(int argc, char *argv[])
     MainMenu w;
     loadModules(&splash);
     splash.finish(&w);
+    QFile file(":/browser/helper/style.qss");
+    file.open(QFile::ReadOnly);
+    QString strCSS = QLatin1String(file.readAll());
+    a.setStyleSheet(strCSS);
     w.show();
     return a.exec();
 }

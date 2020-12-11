@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Добавление блюда</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">

@@ -5,5 +5,6 @@
         <file>helper/index.html</file>
         <file>helper/f2.html</file>
         <file>helper/f3.html</file>
+        <file>helper/style.qss</file>
     </qresource>
 </RCC>
