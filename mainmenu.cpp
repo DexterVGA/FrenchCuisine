@@ -4,6 +4,7 @@
 MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/images/icon.png"));
     newIng = new NewIngredient(this);
     newIng->hide();
     newRecipe = new NewRecipe(this);

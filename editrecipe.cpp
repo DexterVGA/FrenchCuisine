@@ -4,6 +4,7 @@
 editRecipe::editRecipe(QWidget *parent) : QMainWindow(parent), ui(new Ui::editRecipe)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/images/icon.png"));
     connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadButton_click()));
     connect(this, SIGNAL(sendData(QString)), parent, SLOT(editReception(QString)));
 }

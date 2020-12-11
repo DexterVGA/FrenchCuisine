@@ -4,6 +4,7 @@
 NewRecipe::NewRecipe(QWidget *parent) : QMainWindow(parent), ui(new Ui::NewRecipe)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/images/icon.png"));
     connect(this, SIGNAL(sendData(QString)), parent, SLOT(newRecipeReception(QString)));
     connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadButton_click()));
 }

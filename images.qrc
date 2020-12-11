@@ -51,5 +51,6 @@
         <file>pictures/49.jpg</file>
         <file>pictures/50.jpg</file>
         <file>pictures/fr_cuisine.jpg</file>
+        <file>pictures/icon.png</file>
     </qresource>
 </RCC>
