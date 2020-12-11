@@ -4,7 +4,7 @@
 MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
 {
     ui->setupUi(this);
-    setWindowIcon(QIcon(":/images/icon.png"));
+    setWindowIcon(QIcon(":/pictures/icon.png"));
     newIng = new NewIngredient(this);
     newIng->hide();
     newRecipe = new NewRecipe(this);
@@ -47,8 +47,7 @@ MainMenu::MainMenu(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainMenu)
 
     srand(time(NULL));
     randomDish = 1 + rand() % 50;
-
-    ui->setFilter_button->setMinimumSize(151, 41);
+    randomDish--;
 }
 
 MainMenu::~MainMenu()

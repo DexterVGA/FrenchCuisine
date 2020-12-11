@@ -4,7 +4,7 @@
 NewIngredient::NewIngredient(QWidget *parent) : QMainWindow(parent), ui(new Ui::NewIngredient)
 {
     ui->setupUi(this);
-    setWindowIcon(QIcon(":/images/icon.png"));
+    setWindowIcon(QIcon(":/pictures/icon.png"));
     connect(this, SIGNAL(sendData(QString)), parent, SLOT(dataReception(QString)));
 }
 

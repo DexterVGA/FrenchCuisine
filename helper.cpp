@@ -4,6 +4,7 @@
 Helper::Helper(QWidget *parent) : QWidget(parent), ui(new Ui::Helper)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/pictures/icon.png"));
     connect(ui->nextButton, SIGNAL(clicked()), ui->textBrowser, SLOT(forward()));
     connect(ui->prevButton, SIGNAL(clicked()), ui->textBrowser, SLOT(backward()));
     connect(ui->homeButton, SIGNAL(clicked()), ui->textBrowser, SLOT(home()));
